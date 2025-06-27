@@ -1,0 +1,27 @@
+name: 接收意向同意書 & 存檔
+on:
+  repository_dispatch:
+    types: [submit_agreement]
+
+jobs:
+  save_pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 建立存檔目錄
+        run: mkdir -p forms
+
+      - name: 存下 PDF（解 base64）
+        run: |
+          echo "${{ github.event.client_payload.pdfData }}" > pdf.txt
+          base64string=$(cat pdf.txt | sed 's/^data:application\/pdf;base64,//')
+          echo $base64string | base64 -d > forms/${{ github.event.client_payload.name }}_同意書.pdf
+
+      - name: 提交到 repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add forms/
+          git commit -m "新增 ${{ github.event.client_payload.name }}_同意書.pdf"
+          git push
