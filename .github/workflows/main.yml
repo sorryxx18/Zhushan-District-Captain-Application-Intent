@@ -4,6 +4,9 @@ on:
   repository_dispatch:
     types: [submit_agreement]
 
+permissions:
+  contents: write
+
 jobs:
   save_and_mail_pdf:
     runs-on: ubuntu-latest
@@ -41,7 +44,7 @@ jobs:
           username: ${{ secrets.MAIL_USER }}
           password: ${{ secrets.MAIL_PASS }}
           subject: "[自動通知] 新消防特考班區隊長意向同意書"
-          to: sorryxx18@gmail.com   # <--- 這裡改成你要收的信箱
+          to: sorryxx18@gmail.com   # <-- 改成你的收件信箱
           from: "消防表單自動通知 <sorryxx18@gmail.com>"
           body: |
             您好，已收到新的消防特考班區隊長意向同意書。
