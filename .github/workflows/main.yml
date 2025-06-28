@@ -1,11 +1,11 @@
-name: 接收意向同意書 & 存檔
+name: 接收意向同意書 & 存檔寄信
 
 on:
   repository_dispatch:
     types: [submit_agreement]
 
 jobs:
-  save_pdf:
+  save_and_mail_pdf:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,19 +23,30 @@ jobs:
             exit 1
           fi
 
-          # 防止檔名特殊字元
+          # 安全檔名，移除特殊字元
           SAFE_NAME=$(echo "$NAME" | sed 's/[^a-zA-Z0-9_一-龥]/_/g')
           PDF_PATH="forms/${SAFE_NAME}_同意書.pdf"
-
-          # 移除 Data URI 前綴
           B64=$(echo "$PDF_B64" | sed 's/^data:application\/pdf;base64,//')
           echo "$B64" | base64 -d > "$PDF_PATH"
-
-          # 確認是否成功
           if [ ! -s "$PDF_PATH" ]; then
             echo "PDF 檔案寫入失敗！"
             exit 1
           fi
+
+      - name: 寄出 PDF 同意書郵件
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.MAIL_USER }}
+          password: ${{ secrets.MAIL_PASS }}
+          subject: "[自動通知] 新消防特考班區隊長意向同意書"
+          to: your-admin@mail.com   # ← 換成你要收的信箱
+          from: "消防表單自動通知 <your-admin@mail.com>"
+          body: |
+            您好，已收到新的消防特考班區隊長意向同意書。
+            詳細資訊請見附檔。
+          attachments: forms/${{ github.event.client_payload.name }}_同意書.pdf
 
       - name: 提交到 repo
         run: |
