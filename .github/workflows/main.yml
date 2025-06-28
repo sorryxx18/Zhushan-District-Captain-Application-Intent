@@ -23,7 +23,7 @@ jobs:
             exit 1
           fi
 
-          # 安全檔名，移除特殊字元
+          # 檔名安全處理
           SAFE_NAME=$(echo "$NAME" | sed 's/[^a-zA-Z0-9_一-龥]/_/g')
           PDF_PATH="forms/${SAFE_NAME}_同意書.pdf"
           B64=$(echo "$PDF_B64" | sed 's/^data:application\/pdf;base64,//')
@@ -41,8 +41,8 @@ jobs:
           username: ${{ secrets.MAIL_USER }}
           password: ${{ secrets.MAIL_PASS }}
           subject: "[自動通知] 新消防特考班區隊長意向同意書"
-          to: your-admin@mail.com   # ← 換成你要收的信箱
-          from: "消防表單自動通知 <your-admin@mail.com>"
+          to: sorryxx18@gmail.com   # <--- 這裡改成你要收的信箱
+          from: "消防表單自動通知 <sorryxx18@gmail.com>"
           body: |
             您好，已收到新的消防特考班區隊長意向同意書。
             詳細資訊請見附檔。
