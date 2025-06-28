@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/signature_pad@5.0.7/dist/signature_pad.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     body{background:linear-gradient(135deg,#1a2980,#26d0ce);min-height:100vh;display:flex;justify-content:center;align-items:center;padding:20px;}
     .container{width:100%;max-width:740px;background:rgba(255,255,255,.98);border-radius:20px;box-shadow:0 15px 40px rgba(0,0,0,.18);overflow:hidden;}
@@ -110,7 +111,7 @@
 <script>
   // ======= 改成你的 Repo 與 GitHub Token =======
   const githubRepo = "sorryxx18/fire-sign-send";   // 你的 GitHub 帳號/Repo
-  const githubToken = "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";           // 你的 GitHub token
+  const githubToken = "你的 GitHub token";         // 請務必本地測試，不要 push！
   // =============================================
 
   // ==== 畫布自適應與簽名提示 ====
@@ -164,15 +165,41 @@
       showMsg(false,"請填寫所有必填欄位");
       return;
     }
+
+    // 用 jsPDF 產 PDF 檔（含簽名圖）
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF();
+    pdf.setFont("helvetica", "bold");
+    pdf.setFontSize(16);
+    pdf.text("消防特考班區隊長意向同意書", 15, 20);
+
+    pdf.setFontSize(12);
+    pdf.text(`姓名：${document.getElementById("name").value}`, 15, 40);
+    pdf.text(`身分證字號：${document.getElementById("idNumber").value}`, 15, 50);
+    pdf.text(`公務信箱：${document.getElementById("email").value}`, 15, 60);
+    pdf.text(`填寫時間：${document.getElementById("fillTime").value}`, 15, 70);
+    pdf.text(`意願：${document.querySelector('input[name="willingness"]:checked').value}`, 15, 80);
+    pdf.text("電子簽名：", 15, 100);
+
+    // 插入簽名圖片
+    const signatureDataUrl = signaturePad.toDataURL();
+    pdf.addImage(signatureDataUrl, "PNG", 50, 90, 100, 30);
+
+    // 產生 PDF base64（data:application/pdf;base64,...）
+    const pdfDataUri = pdf.output('datauristring');
+
+    // 打包送出
     const data = {
       name: document.getElementById("name").value,
       idNumber: document.getElementById("idNumber").value,
       email: document.getElementById("email").value,
       fillTime: document.getElementById("fillTime").value,
       willingness: document.querySelector('input[name="willingness"]:checked').value,
-      signature: signaturePad.toDataURL()
+      pdfData: pdfDataUri
     };
+
     showMsg(null,"處理中…");
+
     fetch(`https://api.github.com/repos/${githubRepo}/dispatches`, {
       method: "POST",
       headers: {
@@ -182,10 +209,7 @@
       },
       body: JSON.stringify({
         event_type: "submit_agreement",
-        client_payload: {
-          ...data
-          // pdfData: data.signature // 如果要傳 PDF 檔（進階）
-        }
+        client_payload: data
       })
     })
     .then(async resp => {
