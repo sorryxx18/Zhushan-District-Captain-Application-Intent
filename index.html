@@ -1,242 +1,505 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="utf-8">
-  <title>消防特考班區隊長意向同意書</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/signature_pad@5.0.7/dist/signature_pad.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <style>
-    body{background:linear-gradient(135deg,#1a2980,#26d0ce);min-height:100vh;display:flex;justify-content:center;align-items:center;padding:20px;}
-    .container{width:100%;max-width:740px;background:rgba(255,255,255,.98);border-radius:20px;box-shadow:0 15px 40px rgba(0,0,0,.18);overflow:hidden;}
-    header{background:linear-gradient(90deg,#4285f4,#34a853);color:#fff;text-align:center;padding:28px 18px 20px 18px;}
-    header h1{font-size:2.1rem;margin-bottom:8px;}
-    header p{font-size:1.12rem;}
-    .content{padding:32px 22px 25px 22px;}
-    .form-title{font-size:1.32rem;text-align:center;color:#2566c7;font-weight:700;margin-bottom:26px;}
-    form{max-width:410px;margin:0 auto;}
-    .form-group{margin-bottom:23px;}
-    .form-group label{font-weight:600;display:block;margin-bottom:8px;}
-    .form-group input{width:100%;padding:12px;font-size:1.05rem;border-radius:7px;border:1.3px solid #b2bdd2;background:#f7fafc;}
-    .form-group input:focus{border-color:#256ad7;}
-    .radio-group{display:flex;gap:22px;margin-top:8px;}
-    .radio-option{display:flex;align-items:center;gap:6px;}
-    .signature-section{margin:32px 0 16px 0;}
-    .signature-title{text-align:center;margin-bottom:15px;color:#4285f4;font-size:1.13rem;font-weight:600;}
-    .canvas-container{border:2px dashed #c0c0c0;border-radius:13px;background:#f9f9f9;position:relative;overflow:hidden;margin-bottom:18px;}
-    #signatureCanvas{width:100%;min-width:180px;height:150px;display:block;cursor:crosshair;background:#fff;touch-action:none;border-radius:7px;}
-    .canvas-placeholder{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#999;font-size:1.08rem;pointer-events:none;text-align:center;z-index:0;}
-    .controls{display:flex;gap:14px;justify-content:center;}
-    .btn{padding:12px 28px;border:none;border-radius:50px;font-size:1.05rem;font-weight:600;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:10px;min-width:120px;}
-    .btn-clear{background:linear-gradient(135deg,#ff6b6b,#ff8e8e);color:#fff;}
-    .btn-submit{background:linear-gradient(135deg,#4285f4,#34a853);color:#fff;}
-    .status{display:none;text-align:center;margin-top:28px;}
-    .status-success{background:linear-gradient(135deg,#d4edda,#c3e6cb);color:#155724;padding:27px 16px 17px 16px;border-radius:13px;}
-    .status-error{background:linear-gradient(135deg,#fce8e6,#fbd4d1);color:#c5221f;padding:27px 16px 17px 16px;border-radius:13px;}
-    .status a{color:#256ad7;font-weight:bold;text-decoration:underline;}
-    @media(max-width:650px){
-      .container{max-width:99vw;}
-      .content{padding:17px 6vw 16px 6vw;}
-      .form-title{font-size:1.09rem;}
-      #signatureCanvas{height:95px;}
-      .btn{padding:12px 0;font-size:.99rem;min-width:85px;}
-    }
-  </style>
+<meta charset="utf-8" />
+<title>支援內政部消防署特考班區隊長意願調查表</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+crossorigin="anonymous"
+/>
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@5.0.7/dist/signature_pad.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+html,
+body {
+min-height: 100%;
+background: linear-gradient(135deg, #1a2980 0%, #26d0ce 100%);
+font-family: "Microsoft JhengHei", Arial, sans-serif;
+margin: 0;
+padding: 0;
+overscroll-behavior-y: contain;
+}
+.container {
+max-width: 670px;
+margin: 36px auto 30px auto;
+background: rgba(255, 255, 255, 0.97);
+border-radius: 32px;
+box-shadow: 0 15px 48px rgba(0, 0, 0, 0.15);
+overflow: visible;
+padding-bottom: 30px;
+}
+.headerbox {
+background: linear-gradient(100deg, #2450a7 40%, #19d1b5 100%);
+color: #fff;
+border-top-left-radius: 56px;
+border-top-right-radius: 56px;
+border-bottom-left-radius: 24px;
+border-bottom-right-radius: 24px;
+padding: 34px 22px 26px 22px;
+text-align: center;
+box-shadow: 0 2px 24px #0ca6c040;
+margin: 18px 22px 0 22px;
+position: relative;
+z-index: 1;
+}
+.headerbox h1 {
+font-size: 1.95rem;
+margin: 0 0 15px 0;
+font-weight: 900;
+letter-spacing: 1.5px;
+}
+.headerbox p {
+font-size: 1.15rem;
+margin: 0;
+line-height: 1.7;
+}
+.form-title {
+font-size: 1.14rem;
+text-align: center;
+color: #2566c7;
+font-weight: 700;
+margin: 32px 0 19px 0;
+}
+.content {
+padding: 0 30px 0 30px;
+}
+form {
+width: 100%;
+margin: 0 auto;
+}
+.form-group {
+margin-bottom: 19px;
+}
+.form-group label {
+font-weight: 700;
+display: block;
+margin-bottom: 7px;
+color: #134199;
+}
+.form-group input,
+.form-group select {
+width: 100%;
+padding: 14px;
+font-size: 1.11rem;
+border-radius: 10px;
+border: 1.3px solid #b2bdd2;
+background: #f7fafc;
+box-sizing: border-box;
+}
+.form-group input:focus {
+border-color: #256ad7;
+outline: none;
+}
+.radio-group {
+display: flex;
+gap: 35px;
+margin: 7px 0 0 2px;
+}
+.radio-option {
+display: flex;
+align-items: center;
+gap: 7px;
+font-weight: 700;
+font-size: 1.09rem;
+color: #106ad3;
+}
+.signature-section {
+margin: 36px 0 16px 0;
+}
+.signature-title {
+text-align: center;
+margin-bottom: 13px;
+color: #257be6;
+font-size: 1.15rem;
+font-weight: 600;
+letter-spacing: 0.5px;
+}
+.canvas-container {
+border: 2.5px dashed #b1b7c6;
+border-radius: 18px;
+background: #f5faff;
+position: relative;
+overflow: hidden;
+margin-bottom: 15px;
+height: 360px;
+box-shadow: 0 2px 14px #e1e7f4a8;
+box-sizing: border-box;
+}
+#signatureCanvas {
+width: 100%;
+height: 100%;
+display: block;
+cursor: crosshair;
+background: #fff;
+touch-action: none;
+border-radius: 13px;
+}
+.canvas-placeholder {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+color: #aaa;
+font-size: 1.18rem;
+pointer-events: none;
+text-align: center;
+z-index: 0;
+user-select: none;
+opacity: 0.85;
+}
+.controls {
+display: flex;
+gap: 19px;
+justify-content: center;
+margin-top: 9px;
+margin-bottom: 7px;
+}
+.btn {
+padding: 16px 0;
+border: none;
+border-radius: 36px;
+font-size: 1.13rem;
+font-weight: 700;
+cursor: pointer;
+transition: all 0.15s;
+display: flex;
+align-items: center;
+gap: 10px;
+min-width: 142px;
+width: 45%;
+justify-content: center;
+letter-spacing: 1px;
+box-shadow: 0 2px 18px #28dfbd22;
+}
+.btn-clear {
+background: linear-gradient(135deg, #ff6b6b, #ffb36b);
+color: #fff;
+}
+.btn-submit {
+background: linear-gradient(135deg, #4285f4, #34a853);
+color: #fff;
+}
+.btn:disabled {
+cursor: not-allowed;
+background: #aaa;
+}
+.status {
+display: none;
+text-align: center;
+margin-top: 34px;
+}
+.status-success {
+background: linear-gradient(135deg, #d4edda, #c3e6cb);
+color: #155724;
+padding: 27px 16px 17px 16px;
+border-radius: 14px;
+}
+.status-error {
+background: linear-gradient(135deg, #fce8e6, #fbd4d1);
+color: #c5221f;
+padding: 27px 16px 17px 16px;
+border-radius: 13px;
+}
+.spacer {
+height: 92px;
+width: 100%;
+}
+@media (max-width: 900px) {
+.container { max-width: 99vw; border-radius: 0; margin: 0; }
+.headerbox { border-top-left-radius: 36px; border-top-right-radius: 36px; border-bottom-left-radius: 18px; border-bottom-right-radius: 18px; margin: 0; }
+.content { padding: 0 5vw; }
+.btn { font-size: 1.04rem; }
+.canvas-container { height: 250px; }
+}
+@media (max-width: 540px) {
+.headerbox { padding: 22px 2vw 15px 2vw; }
+.headerbox h1 { font-size: 1.5rem; }
+.content { padding: 0 2vw; }
+.btn { padding: 13px 0; min-width: 108px; }
+.canvas-container { height: 220px; }
+}
+</style>
 </head>
 <body>
 <div class="container">
-  <header>
-    <h1><i class="fas fa-signature"></i> 消防特考班區隊長意向同意書</h1>
-    <p>請正確填寫下列表單並簽名，完成後點擊提交</p>
-  </header>
-  <div class="content">
-    <div class="form-title">— 意向同意書填寫 —</div>
-    <form id="agreementForm" autocomplete="off">
-      <div class="form-group">
-        <label for="name">姓名 *</label>
-        <input type="text" id="name" required placeholder="請輸入您的姓名">
-      </div>
-      <div class="form-group">
-        <label for="idNumber">身分證字號 *</label>
-        <input type="text" id="idNumber" required placeholder="A123456789">
-      </div>
-      <div class="form-group">
-        <label for="email">公務信箱 *</label>
-        <input type="email" id="email" required placeholder="example@gov.taipei">
-      </div>
-      <div class="form-group">
-        <label for="fillTime">填寫時間 *</label>
-        <input type="datetime-local" id="fillTime" required>
-      </div>
-      <div class="signature-section">
-        <div class="signature-title">簽名 *</div>
-        <div class="canvas-container" style="position:relative;">
-          <canvas id="signatureCanvas"></canvas>
-          <div class="canvas-placeholder" id="canvasPlaceholder"><i class="fas fa-pen"></i> 請在此區域簽名</div>
-        </div>
-        <div class="controls">
-          <button class="btn btn-clear" type="button" id="clearBtn"><i class="fas fa-eraser"></i> 清除簽名</button>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>114年消防特考班區隊長意願 *</label>
-        <div class="radio-group">
-          <label class="radio-option">
-            <input type="radio" name="willingness" value="有意願" required checked> 有意願
-          </label>
-          <label class="radio-option">
-            <input type="radio" name="willingness" value="無意願"> 無意願
-          </label>
-        </div>
-      </div>
-      <div class="controls">
-        <button class="btn btn-submit" type="submit"><i class="fas fa-paper-plane"></i> 提交同意書</button>
-      </div>
-    </form>
-    <div class="status status-success" id="successMsg">
-      <i class="fas fa-check-circle" style="font-size:2rem;"></i>
-      <div style="font-weight:700;font-size:1.10rem;margin-top:6px;">
-        表單送出成功，PDF 已自動寄到管理員信箱！
-      </div>
-      <div style="margin:10px 0 0 0;font-size:.98rem;">如 5 分鐘內未收到，請洽系統管理員。</div>
-    </div>
-    <div class="status status-error" id="errorMsg">
-      <i class="fas fa-exclamation-triangle" style="font-size:2rem;"></i>
-      <div style="font-weight:700;font-size:1.08rem;margin-top:5px;">送出失敗</div>
-      <div id="errDetail" style="margin-top:7px;"></div>
-    </div>
-  </div>
+<div class="headerbox">
+<h1>
+<i class="fas fa-file-alt"></i> 支援內政部消防署特考班區隊長意願調查表
+</h1>
+<p>請正確填寫下列表單並簽名，點「送出」即可產生 PDF 並自動寄送</p>
+</div>
+<div class="content">
+<div class="form-title">— 意願調查表填寫 —</div>
+<form id="agreementForm" autocomplete="off">
+<div class="form-group">
+<label for="unit">單位 *</label>
+<input type="text" id="unit" required placeholder="請輸入您的服務單位" />
+</div>
+<div class="form-group">
+<label for="jobTitle">職稱 *</label>
+<input type="text" id="jobTitle" required placeholder="請輸入您的職稱" />
+</div>
+<div class="form-group">
+<label for="name">姓名 *</label>
+<input type="text" id="name" required placeholder="請輸入您的姓名" />
+</div>
+<div class="form-group">
+<label for="email">公務信箱 *</label>
+<input type="email" id="email" required placeholder="ex1234@gov.taipei" />
+</div>
+<div class="form-group">
+<label for="fillTime">填寫時間 *</label>
+<input type="datetime-local" id="fillTime" required />
+</div>
+<div class="form-group">
+<label>是否有意願支援特考班區隊長 *</label>
+<div class="radio-group">
+<label class="radio-option"><input type="radio" name="willingness" value="是，我有意願" required checked />是，我有意願</label>
+<label class="radio-option"><input type="radio" name="willingness" value="否，我無意願" />否，我無意願</label>
+</div>
+</div>
+<div class="signature-section">
+<div class="signature-title">本人簽名 *</div>
+<div class="canvas-container" style="position: relative">
+<canvas id="signatureCanvas"></canvas>
+<div class="canvas-placeholder" id="canvasPlaceholder">
+<i class="fas fa-pen"></i> 請在此區域內簽名
+</div>
+</div>
+<div class="controls">
+<button class="btn btn-clear" type="button" id="clearBtn">
+<i class="fas fa-eraser"></i> 清除簽名
+</button>
+<button class="btn btn-submit" type="submit">
+<i class="fas fa-paper-plane"></i> 送出調查表
+</button>
+</div>
+</div>
+</form>
+<div class="status status-success" id="successMsg">
+<i class="fas fa-check-circle" style="font-size: 2rem"></i>
+<div style="font-weight: 700; font-size: 1.1rem; margin-top: 6px">
+調查表成功送出，PDF 已自動寄到管理員信箱！
+</div>
+<div style="margin: 10px 0 0 0; font-size: 0.98rem">
+感謝您的填寫。
+</div>
+</div>
+<div class="status status-error" id="errorMsg">
+<i class="fas fa-exclamation-triangle" style="font-size: 2rem"></i>
+<div style="font-weight: 700; font-size: 1.08rem; margin-top: 5px">
+送出失敗
+</div>
+<div id="errDetail" style="margin-top: 7px"></div>
+</div>
+<div class="spacer"></div>
+</div>
 </div>
 <script>
-  // ======= 改成你的 Repo 與 GitHub Token =======
-  const githubRepo = "sorryxx18/fire-sign-send";   // 你的 GitHub 帳號/Repo
-  const githubToken = "你的 GitHub token";         // 請務必本地測試，不要 push！
-  // =============================================
+const WEBHOOK_URL = "https://n8n-emculoyh.ap-northeast-1.clawcloudrun.com/webhook/fire-sign";
+const canvas = document.getElementById("signatureCanvas");
+let signaturePad;
 
-  // ==== 畫布自適應與簽名提示 ====
-  const canvas = document.getElementById('signatureCanvas');
-  let signaturePad;
-  function resizeCanvas(){
-    const container = canvas.parentElement;
-    const ratio = Math.max(window.devicePixelRatio||1,1);
-    let oldData = signaturePad ? signaturePad.toData() : null;
-    canvas.width = container.clientWidth * ratio;
-    canvas.height = parseFloat(getComputedStyle(canvas).height) * ratio;
-    canvas.style.width = container.clientWidth+'px';
-    const ctx = canvas.getContext('2d');
-    ctx.setTransform(1,0,0,1,0,0);
-    ctx.scale(ratio,ratio);
-    if(signaturePad){
-      signaturePad.clear();
-      signaturePad = new SignaturePad(canvas,{backgroundColor:'#fff',penColor:'#222'});
-      if(oldData) signaturePad.fromData(oldData);
-    }else{
-      signaturePad = new SignaturePad(canvas,{backgroundColor:'#fff',penColor:'#222'});
-    }
-    signaturePad.addEventListener('beginStroke',()=>{document.getElementById('canvasPlaceholder').style.display='none';});
-    if (signaturePad.isEmpty()) document.getElementById('canvasPlaceholder').style.display='block';
-    else document.getElementById('canvasPlaceholder').style.display='none';
-  }
-  window.addEventListener('DOMContentLoaded',()=>{
-    resizeCanvas();
-    window.addEventListener('resize',resizeCanvas);
-    document.getElementById('clearBtn').onclick = ()=>{ signaturePad.clear(); document.getElementById('canvasPlaceholder').style.display='block'; };
-    setNow();
-  });
-  function setNow() {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    document.getElementById("fillTime").value = `${year}-${month}-${day}T${hours}:${minutes}`;
-  }
+function resizeCanvas() {
+const container = canvas.parentElement;
+const ratio = Math.max(window.devicePixelRatio || 1, 1);
+const oldData = signaturePad ? signaturePad.toData() : null;
+const containerStyle = getComputedStyle(container);
+const newWidth = parseFloat(containerStyle.width);
+const newHeight = parseFloat(containerStyle.height);
 
-  // ==== 送出表單到 GitHub Actions，顯示結果 ====
-  document.getElementById("agreementForm").onsubmit = async function(e){
-    e.preventDefault();
-    if(signaturePad.isEmpty()){
-      showMsg(false,"請簽名");
-      return;
-    }
-    if(!document.getElementById("name").value || !document.getElementById("idNumber").value || !document.getElementById("email").value){
-      showMsg(false,"請填寫所有必填欄位");
-      return;
-    }
+canvas.width = newWidth * ratio;
+canvas.height = newHeight * ratio;
+canvas.style.width = newWidth + "px";
+canvas.style.height = newHeight + "px";
 
-    // 用 jsPDF 產 PDF 檔（含簽名圖）
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF();
-    pdf.setFont("helvetica", "bold");
-    pdf.setFontSize(16);
-    pdf.text("消防特考班區隊長意向同意書", 15, 20);
+const ctx = canvas.getContext("2d");
+ctx.setTransform(1, 0, 0, 1, 0, 0);
+ctx.scale(ratio, ratio);
 
-    pdf.setFontSize(12);
-    pdf.text(`姓名：${document.getElementById("name").value}`, 15, 40);
-    pdf.text(`身分證字號：${document.getElementById("idNumber").value}`, 15, 50);
-    pdf.text(`公務信箱：${document.getElementById("email").value}`, 15, 60);
-    pdf.text(`填寫時間：${document.getElementById("fillTime").value}`, 15, 70);
-    pdf.text(`意願：${document.querySelector('input[name="willingness"]:checked').value}`, 15, 80);
-    pdf.text("電子簽名：", 15, 100);
+if (signaturePad) {
+signaturePad.clear();
+}
+signaturePad = new SignaturePad(canvas, { backgroundColor: "#fff", penColor: "#222" });
 
-    // 插入簽名圖片
-    const signatureDataUrl = signaturePad.toDataURL();
-    pdf.addImage(signatureDataUrl, "PNG", 50, 90, 100, 30);
+if (oldData) {
+signaturePad.fromData(oldData);
+}
+signaturePad.addEventListener("beginStroke", () => {
+document.getElementById("canvasPlaceholder").style.display = "none";
+});
+if (signaturePad.isEmpty()) {
+document.getElementById("canvasPlaceholder").style.display = "block";
+} else {
+document.getElementById("canvasPlaceholder").style.display = "none";
+}
+}
+window.addEventListener("DOMContentLoaded", () => {
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+document.getElementById("clearBtn").onclick = () => {
+signaturePad.clear();
+document.getElementById("canvasPlaceholder").style.display = "block";
+};
+setNow();
+});
 
-    // 產生 PDF base64（data:application/pdf;base64,...）
-    const pdfDataUri = pdf.output('datauristring');
+function setNow() {
+const now = new Date();
+const year = now.getFullYear();
+const month = String(now.getMonth() + 1).padStart(2, "0");
+const day = String(now.getDate()).padStart(2, "0");
+const hours = String(now.getHours()).padStart(2, "0");
+const minutes = String(now.getMinutes()).padStart(2, "0");
+document.getElementById("fillTime").value = `${year}-${month}-${day}T${hours}:${minutes}`;
+}
 
-    // 打包送出
-    const data = {
-      name: document.getElementById("name").value,
-      idNumber: document.getElementById("idNumber").value,
-      email: document.getElementById("email").value,
-      fillTime: document.getElementById("fillTime").value,
-      willingness: document.querySelector('input[name="willingness"]:checked').value,
-      pdfData: pdfDataUri
-    };
+document.getElementById("agreementForm").onsubmit = async function (e) {
+e.preventDefault();
 
-    showMsg(null,"處理中…");
+const submitBtn = document.querySelector('.btn-submit');
+const originalBtnHTML = submitBtn.innerHTML;
 
-    fetch(`https://api.github.com/repos/${githubRepo}/dispatches`, {
-      method: "POST",
-      headers: {
-        "Authorization": `token ${githubToken}`,
-        "Accept": "application/vnd.github.everest-preview+json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        event_type: "submit_agreement",
-        client_payload: data
-      })
-    })
-    .then(async resp => {
-      if (resp.ok) {
-        showMsg(true);
-        document.getElementById("agreementForm").reset();
-        signaturePad.clear();
-        setNow();
-      } else {
-        let e;
-        try { e = await resp.json(); } catch { e = {}; }
-        showMsg(false, e.message || "GitHub 傳送失敗，請稍後再試");
-      }
-    })
-    .catch(err => showMsg(false, "連線失敗：" + err));
-  };
-  function showMsg(isOK, txt){
-    document.getElementById("successMsg").style.display = isOK === true ? "block" : "none";
-    document.getElementById("errorMsg").style.display = isOK === false ? "block" : "none";
-    if(isOK === false) document.getElementById("errDetail").innerText = txt||"";
-    if(isOK === null){
-      document.getElementById("successMsg").style.display = "none";
-      document.getElementById("errorMsg").style.display = "block";
-      document.getElementById("errDetail").innerText = txt||"";
-    }
-    if(isOK === true) document.getElementById("errDetail").innerText = "";
-  }
+submitBtn.disabled = true;
+submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 處理中...';
+
+showMsg(null);
+
+try {
+const requiredFields = [
+{ id: 'unit', name: '單位' },
+{ id: 'jobTitle', name: '職稱' },
+{ id: 'name', name: '姓名' },
+{ id: 'email', name: '公務信箱' },
+];
+
+for (const field of requiredFields) {
+if (!document.getElementById(field.id).value) {
+throw new Error(`請填寫「${field.name}」欄位`);
+}
+}
+if (signaturePad.isEmpty()) {
+throw new Error("請務必在指定區域簽名");
+}
+
+const data = {
+unit: document.getElementById("unit").value,
+jobTitle: document.getElementById("jobTitle").value,
+name: document.getElementById("name").value,
+email: document.getElementById("email").value,
+fillTime: document.getElementById("fillTime").value,
+willingness: document.querySelector('input[name="willingness"]:checked').value,
+signature: signaturePad.toDataURL(),
+};
+
+const preview = document.createElement("div");
+preview.style.cssText = `
+box-sizing: border-box;
+width: 800px;
+padding: 60px;
+background: #fff;
+position: fixed;
+left: -9999px;
+top: -9999px;
+font-family: 'Helvetica', 'Arial', 'Microsoft JhengHei', sans-serif;
+`;
+
+const willingnessColor = data.willingness === '是，我有意願' ? '#0056b3' : '#d9534f';
+const willingnessText = data.willingness;
+const now = new Date();
+const generatedTime = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+preview.innerHTML = `
+<div style="text-align: center; border-bottom: 2px solid #333; padding-bottom: 15px; margin-bottom: 30px;">
+<h1 style="font-size: 26px; color: #333; margin: 0; font-weight: 900;">支援內政部消防署特考班區隊長</h1>
+<h2 style="font-size: 30px; color: #0056b3; margin: 8px 0 0 0; font-weight: 900;">意願調查表</h2>
+</div>
+<div style="font-size: 18px; line-height: 2.5; color: #333; margin-top: 40px;">
+<p><strong>單　　位：</strong> ${data.unit}</p>
+<p><strong>職　　稱：</strong> ${data.jobTitle}</p>
+<p><strong>姓　　名：</strong> ${data.name}</p>
+<p><strong>公務信箱：</strong> ${data.email}</p>
+<p><strong>填寫時間：</strong> ${data.fillTime.replace("T", " ")}</p>
+<p><strong>支援意願：</strong> <span style="font-weight: bold; color: ${willingnessColor};">${willingnessText}</span></p>
+</div>
+<div style="margin-top: 60px;">
+<p style="font-size: 18px; color: #333; margin-bottom: 15px;"><strong>本 人 簽 名：</strong></p>
+<div id="signature-placeholder" style="display: inline-block; width: 300px; height: 150px;">
+</div>
+</div>
+<div style="text-align: right; margin-top: 70px; font-size: 14px; color: #777;">
+<p style="margin: 0;">文件產生時間：${generatedTime}</p>
+</div>
+`;
+document.body.appendChild(preview);
+
+const placeholder = preview.querySelector('#signature-placeholder');
+// <<< 修改處 1: 降低解析度 >>>
+const scale = 1.2;
+
+const drawX = placeholder.offsetLeft * scale;
+const drawY = placeholder.offsetTop * scale;
+const drawWidth = placeholder.clientWidth * scale;
+const drawHeight = placeholder.clientHeight * scale;
+
+const canvasImg = await html2canvas(preview, {
+scale: scale,
+useCORS: true // 建議加入以增加穩定性
+});
+document.body.removeChild(preview);
+
+// <<< 修改處 2: 將圖片格式改為JPEG >>>
+const imgData = canvasImg.toDataURL("image/jpeg", 0.9);
+
+const pdf = new window.jspdf.jsPDF({
+orientation: "p",
+unit: "px",
+format: [canvasImg.width, canvasImg.height],
+});
+// <<< 修改處 3: 添加圖片時指定格式為JPEG並啟用壓縮 >>>
+pdf.addImage(imgData, "JPEG", 0, 0, canvasImg.width, canvasImg.height, undefined, 'FAST');
+
+pdf.addImage(data.signature, 'PNG', drawX, drawY, drawWidth, drawHeight);
+
+const pdfBlob = pdf.output("blob");
+
+const formData = new FormData();
+formData.append("unit", data.unit);
+formData.append("jobTitle", data.jobTitle);
+formData.append("name", data.name);
+formData.append("email", data.email);
+formData.append("fillTime", data.fillTime);
+formData.append("willingness", data.willingness);
+formData.append("signature", data.signature);
+// <<< 修改處 4: 套用您之前要求的檔名格式 >>>
+formData.append("file", pdfBlob, `${data.unit}${data.name}意願調查表.pdf`);
+
+const resp = await fetch(WEBHOOK_URL, { method: "POST", body: formData });
+if (!resp.ok) throw new Error("伺服器回應錯誤，請洽系統管理員");
+
+showMsg(true);
+document.getElementById("agreementForm").reset();
+signaturePad.clear();
+document.getElementById("canvasPlaceholder").style.display = 'block';
+setNow();
+
+} catch (err) {
+showMsg(false, err.message || "調查表送出失敗，請再試一次");
+} finally {
+submitBtn.disabled = false;
+submitBtn.innerHTML = originalBtnHTML;
+}
+};
+
+function showMsg(isOK, txt) {
+document.getElementById("successMsg").style.display = isOK === true ? "block" : "none";
+document.getElementById("errorMsg").style.display = isOK === false ? "block" : "none";
+if (isOK === false) document.getElementById("errDetail").innerText = txt || "";
+if (isOK === true || isOK === null) document.getElementById("errDetail").innerText = "";
+}
 </script>
 </body>
 </html>
